@@ -4,9 +4,8 @@
 #include <chrono>
 #include <iostream>
 using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
-void pattern(std::string pat)
-{
-cout<<pat<<flush;
+void pattern(std::string pat){
+cout <<pat << flush;
 sleep_for(seconds(1));
 }
 void displayMessage(std::string msg) {
