@@ -19,7 +19,7 @@ jobs:
       run: |
         pip install cpplint
         cpplint  --filter=-legal,-build/c++11 --linelength=100 *.cpp *.h
-
+        cpplint  --filter=-build/include_what_you_use *.cpp
     - name: build
       run: |
         cmake -S . -B build
