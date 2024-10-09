@@ -4,34 +4,53 @@
 #include <chrono>
 #include <iostream>
 using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
+void pattern(std::string pat) {
+cout << pat << flush;
+sleep_for(seconds(1));
+}
+void report(std::string entry)
+{
+  cout<<entry;
+}
+void displayMessage(std::string msg) {
+    report(msg);
+    for (int i = 0; i < 6; i++) {
+        pattern("\r*");
+        pattern("\r *");
+    }
+}
 
+
+bool criticalTemp(float temperature)
+{
+  if(temperature > 102 || temperature < 95)
+    return true;
+  else
+    return false;
+}
+bool criticalPulseRate(float pulseRate)
+{
+ if (pulseRate < 60 || pulseRate > 100)
+  return true;
+else
+  return false;
+}
+bool ciriticalSpoc(float spo2)
+{
+  if (spo2 < 90)
+    return true;
+  else
+   return false;
+}
 int vitalsOk(float temperature, float pulseRate, float spo2) {
-  if (temperature > 102 || temperature < 95) {
-    cout << "Temperature is critical!\n";
-    for (int i = 0; i < 6; i++) {
-      cout << "\r* " << flush;
-      sleep_for(seconds(1));
-      cout << "\r *" << flush;
-      sleep_for(seconds(1));
-    }
+  if (criticalTemp(temperature)) {
+    displayMessage("Temperature is critical!\n");
     return 0;
-  } else if (pulseRate < 60 || pulseRate > 100) {
-    cout << "Pulse Rate is out of range!\n";
-    for (int i = 0; i < 6; i++) {
-      cout << "\r* " << flush;
-      sleep_for(seconds(1));
-      cout << "\r *" << flush;
-      sleep_for(seconds(1));
-    }
+  } else if (criticalPulseRate(pulseRate)) {
+    displayMessage("Pulse Rate is out of range!\n");
     return 0;
-  } else if (spo2 < 90) {
-    cout << "Oxygen Saturation out of range!\n";
-    for (int i = 0; i < 6; i++) {
-      cout << "\r* " << flush;
-      sleep_for(seconds(1));
-      cout << "\r *" << flush;
-      sleep_for(seconds(1));
-    }
+  } else if (ciriticalSpoc(spo2)) {
+    displayMessage("Oxygen Saturation out of range!\n");
     return 0;
   }
   return 1;
