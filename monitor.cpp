@@ -8,6 +8,10 @@ void pattern(std::string pat) {
 cout << pat << flush;
 sleep_for(seconds(1));
 }
+void report(std::string entry)
+{
+  cout<<entry;
+}
 void displayMessage(std::string msg) {
     report(msg);
     for (int i = 0; i < 6; i++) {
@@ -16,10 +20,7 @@ void displayMessage(std::string msg) {
     }
 }
 
-void report(std::string entry)
-{
-  cout<<entry;
-}
+
 bool criticalTemp(float temperature)
 {
   if(temperature > 102 || temperature < 95)
@@ -27,14 +28,14 @@ bool criticalTemp(float temperature)
   else
     return false;
 }
-bool criticalPulseRate(float pulse)
+bool criticalPulseRate(float pulseRate)
 {
  if (pulseRate < 60 || pulseRate > 100)
   return true;
 else
   return false;
 }
-bool ciriticalSpoc(float spoc2)
+bool ciriticalSpoc(float spo2)
 {
   if (spo2 < 90)
     return true;
